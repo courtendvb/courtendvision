@@ -1,0 +1,135 @@
+================================================================
+  CourtEnd Vision  -  User Manual
+  Version 1.0.0
+================================================================
+
+OVERVIEW
+--------
+CourtEnd Vision is a Windows overlay tool for volleyball analysts.
+It displays a perspective-correct grid over a volleyball court on
+your screen, helping with zone-based data entry during video
+analysis.
+
+The grid stays on top of all other windows at all times and is
+fully transparent to mouse clicks except for the corner handles.
+
+
+SYSTEM REQUIREMENTS
+-------------------
+- Windows 10 / 11  (64-bit)
+- Any display resolution
+
+
+GETTING STARTED
+---------------
+1. Extract the ZIP archive to any folder.
+2. Double-click "CourtEnd Vision.exe" to launch.
+3. The app runs in the system tray (bottom-right of the taskbar).
+   Look for the green circle icon.
+4. A white grid will appear over your screen.
+
+
+FITTING THE GRID TO THE COURT
+------------------------------
+Four corner handles (filled circles) mark the corners of the
+grid. Drag each handle to match the four corners of the court
+visible on your screen.
+
+  - Hover over a corner handle: cursor changes to a grab hand.
+  - Click and drag: move the corner to the desired position.
+  - The grid updates in real time as you drag.
+
+Tip: Fit the handles to the outermost lines of the court
+     (sidelines and end lines).
+
+
+TRAY ICON MENU
+--------------
+Right-click the tray icon to access all controls:
+
+  Show Grid / Hide Grid
+      Toggle the grid visibility.
+
+  Grid Color  >
+      White (Default) / Black / Red / Yellow / Green / Blue
+
+  Opacity (%)  >
+      20% – 100%  (how opaque the grid lines appear)
+
+  Zone Numbers
+      Show or hide the zone numbers (1–9) inside each cell.
+
+  Sub-zones (A/B/C/D)  >
+      Off           - No sub-zone overlay
+      Grid Only     - Dotted dividers only (no letters)
+      Grid + Labels - Dotted dividers with A / B / C / D labels
+
+  Settings...
+      Open the Settings window for detailed adjustments.
+
+  Quit
+      Exit the application.
+
+
+SETTINGS WINDOW
+---------------
+Open via tray menu → "Settings..."
+
+  Grid Color      Color picker for the grid lines.
+  Opacity         Slider: 10% – 100%.
+  Line Width      Thickness of grid lines in pixels (1–8).
+  Zone Numbers    Toggle switch.
+  Sub-zones       Radio: Off / Grid Only / Grid + Labels.
+  Reset Corners   Return all four corners to the default
+                  screen-center position.
+  Apply           Apply all changes immediately.
+  Close           Close the Settings window.
+
+
+GRID LAYOUT
+-----------
+The grid divides the full court (both halves) into 18 cells:
+3 columns (width) × 6 rows (depth).
+
+Zone numbering (viewed from the near camera side):
+
+  Far back   |  1  |  6  |  5  |
+  Far mid    |  9  |  8  |  7  |
+  Far front  |  2  |  3  |  4  |
+  ───────────── NET (dashed) ────
+  Near front |  4  |  3  |  2  |
+  Near mid   |  7  |  8  |  9  |
+  Near back  |  5  |  6  |  1  |
+
+The center dashed line marks the net position.
+
+
+SUB-ZONE LABELS (A / B / C / D)
+--------------------------------
+Each cell is divided into 4 quadrants by dotted lines.
+
+  Near half (rows 4–6 from top):
+      C | B
+      ─────
+      D | A     (A = bottom-right, B = top-right,
+                 C = top-left,    D = bottom-left)
+
+  Far half (rows 1–3 from top) – mirrored for player perspective:
+      A | D
+      ─────
+      B | C     (A = top-left,    B = bottom-left,
+                 C = bottom-right, D = top-right)
+
+
+NOTES
+-----
+- Settings (corner positions, color, opacity, etc.) are saved
+  automatically and restored on next launch.
+- The overlay does NOT capture or record any video or audio.
+- If the grid is not visible, check tray menu → "Show Grid".
+- If the app does not appear in the tray, re-run the .exe.
+
+
+================================================================
+  CourtEnd Vision  |  Built for volleyball analysts
+================================================================

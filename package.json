@@ -1,0 +1,30 @@
+{
+  "name": "courtend-vision",
+  "version": "1.0.0",
+  "productName": "CourtEnd Vision",
+  "description": "Volleyball court analysis grid overlay",
+  "main": "dist/main/main.js",
+  "scripts": {
+    "postinstall": "node scripts/create-icon.js",
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.js --watch",
+    "start": "electron .",
+    "dev": "npm run build && electron .",
+    "pack": "npm run build && node scripts/package.js",
+    "dist": "npm run pack && node scripts/make-zip.js",
+    "dist:win": "npm run pack && node scripts/make-zip.js",
+    "dist:mac": "npm run pack && node scripts/make-zip.js"
+  },
+  "devDependencies": {
+    "@electron/packager": "^20.0.0",
+    "@types/node": "^20.14.0",
+    "concurrently": "^8.2.2",
+    "copy-webpack-plugin": "^12.0.2",
+    "electron": "^29.4.6",
+    "electron-builder": "^24.13.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.5",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
+  }
+}

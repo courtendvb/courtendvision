@@ -1,0 +1,19 @@
+{
+  "appId": "com.courtend.vision",
+  "productName": "CourtEnd Vision",
+  "directories": {
+    "output": "release"
+  },
+  "electronLanguages": ["ja", "en-US"],
+  "files": [
+    "dist/**/*",
+    "assets/**/*",
+    "package.json"
+  ],
+  "win": {
+    "target": [{ "target": "dir", "arch": ["x64"] }],
+    "icon": "assets/icon.png",
+    "sign": false,
+    "signingHashAlgorithms": null
+  }
+}
