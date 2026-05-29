@@ -38,6 +38,30 @@ jobs:
       - name: Build & Package
         run: npm run dist
 
+      # macOS のみ: パッケージ済み .app を起動して 5 秒間クラッシュしないか確認
+      - name: Smoke test (macOS)
+        if: runner.os == 'macOS'
+        run: |
+          APP_BIN="release/mac-unpacked/CourtEnd Vision.app/Contents/MacOS/CourtEnd Vision"
+          echo "起動: $APP_BIN"
+
+          # バックグラウンドで起動
+          "$APP_BIN" &
+          APP_PID=$!
+          echo "PID: $APP_PID"
+
+          # 5 秒待つ
+          sleep 5
+
+          # プロセスが生きているか確認
+          if kill -0 $APP_PID 2>/dev/null; then
+            echo "✓ スモークテスト成功 (5秒間クラッシュなし)"
+            kill $APP_PID
+          else
+            echo "✗ スモークテスト失敗 (アプリがクラッシュしました)"
+            exit 1
+          fi
+
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
