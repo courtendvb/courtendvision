@@ -33,18 +33,25 @@ const namedFolder = path.join(releaseDir, folderName);
 if (fs.existsSync(namedFolder)) fs.rmSync(namedFolder, { recursive: true, force: true });
 fs.renameSync(src, namedFolder);
 
-// フォルダごと圧縮（プラットフォーム別コマンド）
-let cmd;
+// macOS: アプリに ad-hoc 署名を付与（"壊れている"エラーを回避）
 if (IS_MAC) {
-  // macOS: zip -r で絶対パス指定
-  cmd = `cd "${releaseDir}" && zip -r "${dst}" "${folderName}"`;
-} else {
-  // Windows: PowerShell Compress-Archive
-  cmd = `powershell -Command "Compress-Archive -Path '${namedFolder}' -DestinationPath '${dst}'"`;
+  const appPath = path.join(namedFolder, `${name}.app`);
+  if (fs.existsSync(appPath)) {
+    console.log('署名中 (ad-hoc)...');
+    execSync(`codesign --deep --force --sign - '${appPath}'`, { stdio: 'inherit' });
+  }
 }
 
+// フォルダごと圧縮（プラットフォーム別コマンド）
 console.log('ZIP を作成中...');
-execSync(cmd, { stdio: 'inherit' });
+if (IS_MAC) {
+  // ditto: シンボリックリンク・パーミッション・拡張属性をすべて保持
+  execSync(`ditto -c -k --sequesterRsrc --keepParent '${namedFolder}' '${dst}'`, { stdio: 'inherit' });
+} else {
+  // Windows: PowerShell Compress-Archive
+  const cmd = `powershell -Command "Compress-Archive -Path '${namedFolder}' -DestinationPath '${dst}'"`;
+  execSync(cmd, { stdio: 'inherit' });
+}
 
 // 元のフォルダ名に戻す（後続の npm run pack が上書きできるよう）
 fs.renameSync(namedFolder, src);

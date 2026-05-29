@@ -5,7 +5,7 @@
 
 OVERVIEW
 --------
-CourtEnd Vision is a Windows overlay tool for volleyball analysts.
+CourtEnd Vision is an overlay tool for volleyball analysts.
 It displays a perspective-correct grid over a volleyball court on
 your screen, helping with zone-based data entry during video
 analysis.
@@ -17,16 +17,41 @@ fully transparent to mouse clicks except for the corner handles.
 SYSTEM REQUIREMENTS
 -------------------
 - Windows 10 / 11  (64-bit)
+- macOS 12 Monterey or later  (Apple Silicon / Intel)
 - Any display resolution
 
 
-GETTING STARTED
----------------
+GETTING STARTED  —  Windows
+-----------------------------
 1. Extract the ZIP archive to any folder.
 2. Double-click "CourtEnd Vision.exe" to launch.
 3. The app runs in the system tray (bottom-right of the taskbar).
    Look for the green circle icon.
 4. A white grid will appear over your screen.
+
+
+GETTING STARTED  —  macOS (IMPORTANT: first-launch steps)
+-----------------------------------------------------------
+Because the app is not notarized by Apple, macOS Gatekeeper
+may show a warning. Use ONE of the methods below:
+
+  [Method A]  Right-click  (easiest, no Terminal needed)
+    1. Extract the ZIP. Open the "CourtEnd Vision" folder.
+    2. Right-click "CourtEnd Vision.app" → select "Open".
+    3. Click "Open" in the security dialog.
+    4. From the second launch onward, double-click works normally.
+
+  [Method B]  Terminal command
+    Open Terminal and run the following command, then launch the app:
+      xattr -cr ~/Downloads/"CourtEnd Vision"/"CourtEnd Vision.app"
+
+  [Method C]  System Settings
+    1. Try to open the app — it will be blocked.
+    2. Open System Settings → Privacy & Security.
+    3. Scroll down and click "Open Anyway" next to CourtEnd Vision.
+
+After the first successful launch, the app appears in the menu bar
+(top-right of the screen). A white grid will appear over your screen.
 
 
 FITTING THE GRID TO THE COURT
@@ -45,7 +70,8 @@ Tip: Fit the handles to the outermost lines of the court
 
 TRAY ICON MENU
 --------------
-Right-click the tray icon to access all controls:
+Right-click the tray icon (Windows) or menu-bar icon (macOS)
+to access all controls:
 
   Show Grid / Hide Grid
       Toggle the grid visibility.
@@ -54,10 +80,10 @@ Right-click the tray icon to access all controls:
       White (Default) / Black / Red / Yellow / Green / Blue
 
   Opacity (%)  >
-      20% – 100%  (how opaque the grid lines appear)
+      20% - 100%  (how opaque the grid lines appear)
 
   Zone Numbers
-      Show or hide the zone numbers (1–9) inside each cell.
+      Show or hide the zone numbers (1-9) inside each cell.
 
   Sub-zones (A/B/C/D)  >
       Off           - No sub-zone overlay
@@ -73,11 +99,11 @@ Right-click the tray icon to access all controls:
 
 SETTINGS WINDOW
 ---------------
-Open via tray menu → "Settings..."
+Open via tray menu -> "Settings..."
 
   Grid Color      Color picker for the grid lines.
-  Opacity         Slider: 10% – 100%.
-  Line Width      Thickness of grid lines in pixels (1–8).
+  Opacity         Slider: 10% - 100%.
+  Line Width      Thickness of grid lines in pixels (1-8).
   Zone Numbers    Toggle switch.
   Sub-zones       Radio: Off / Grid Only / Grid + Labels.
   Reset Corners   Return all four corners to the default
@@ -89,14 +115,14 @@ Open via tray menu → "Settings..."
 GRID LAYOUT
 -----------
 The grid divides the full court (both halves) into 18 cells:
-3 columns (width) × 6 rows (depth).
+3 columns (width) x 6 rows (depth).
 
 Zone numbering (viewed from the near camera side):
 
   Far back   |  1  |  6  |  5  |
   Far mid    |  9  |  8  |  7  |
   Far front  |  2  |  3  |  4  |
-  ───────────── NET (dashed) ────
+  ------------- NET (dashed) ----
   Near front |  4  |  3  |  2  |
   Near mid   |  7  |  8  |  9  |
   Near back  |  5  |  6  |  1  |
@@ -108,15 +134,15 @@ SUB-ZONE LABELS (A / B / C / D)
 --------------------------------
 Each cell is divided into 4 quadrants by dotted lines.
 
-  Near half (rows 4–6 from top):
+  Near half (rows 4-6 from top):
       C | B
-      ─────
+      -----
       D | A     (A = bottom-right, B = top-right,
                  C = top-left,    D = bottom-left)
 
-  Far half (rows 1–3 from top) – mirrored for player perspective:
+  Far half (rows 1-3 from top) - mirrored for player perspective:
       A | D
-      ─────
+      -----
       B | C     (A = top-left,    B = bottom-left,
                  C = bottom-right, D = top-right)
 
@@ -126,8 +152,9 @@ NOTES
 - Settings (corner positions, color, opacity, etc.) are saved
   automatically and restored on next launch.
 - The overlay does NOT capture or record any video or audio.
-- If the grid is not visible, check tray menu → "Show Grid".
-- If the app does not appear in the tray, re-run the .exe.
+- If the grid is not visible, check tray menu -> "Show Grid".
+- Windows: if the app does not appear in the tray, re-run the .exe.
+- macOS: if the app does not appear in the menu bar, re-run the .app.
 
 
 ================================================================
