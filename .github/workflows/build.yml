@@ -45,6 +45,14 @@ jobs:
           APP_BIN="release/mac-unpacked/CourtEnd Vision.app/Contents/MacOS/CourtEnd Vision"
           echo "起動: $APP_BIN"
 
+          # Intel (x86_64) / Apple Silicon (arm64) 両対応か確認
+          ARCHS=$(lipo -archs "$APP_BIN")
+          echo "アーキテクチャ: $ARCHS"
+          if [[ "$ARCHS" != *x86_64* || "$ARCHS" != *arm64* ]]; then
+            echo "✗ ユニバーサルバイナリではありません"
+            exit 1
+          fi
+
           # バックグラウンドで起動
           "$APP_BIN" &
           APP_PID=$!

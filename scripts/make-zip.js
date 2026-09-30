@@ -12,7 +12,7 @@ const name     = pkg.productName || pkg.name;
 
 const IS_MAC      = process.platform === 'darwin';
 const unpackedDir = IS_MAC ? 'mac-unpacked' : 'win-unpacked';
-const platformTag = IS_MAC ? `mac-${process.arch}` : 'win64';
+const platformTag = IS_MAC ? 'mac-universal' : 'win64';
 
 const releaseDir  = path.join(__dirname, '../release');
 const src         = path.join(releaseDir, unpackedDir);
