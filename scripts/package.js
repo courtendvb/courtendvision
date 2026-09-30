@@ -12,7 +12,9 @@ const APP_NAME = pkg.productName || pkg.name;
 
 const IS_MAC   = process.platform === 'darwin';
 const PLATFORM = IS_MAC ? 'darwin' : 'win32';
-const ARCH     = IS_MAC ? process.arch : 'x64';  // Apple Silicon: arm64 / Intel: x64
+// macOS: Intel / Apple Silicon の両方で動くユニバーサルバイナリを作る
+// （ビルド機の CPU に合わせると、もう一方の Mac では「このMacには対応していない」と出る）
+const ARCH     = IS_MAC ? 'universal' : 'x64';
 
 const ROOT      = path.join(__dirname, '..');
 const OUT_DIR   = path.join(ROOT, 'release');
