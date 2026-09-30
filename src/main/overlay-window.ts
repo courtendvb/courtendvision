@@ -21,6 +21,11 @@ export class OverlayWindow {
       hasShadow: false,
       resizable: false,
       movable: false,
+      // macOS: 非アクティブなウィンドウへの最初のクリックを捨てずに
+      // Web コンテンツへ届ける（これが無いとコーナーをドラッグできない）
+      acceptFirstMouse: true,
+      // macOS: メニューバー領域まで含めて画面全体を覆えるようにする
+      enableLargerThanScreen: true,
       webPreferences: {
         contextIsolation: true,
         nodeIntegration: false,
@@ -34,6 +39,8 @@ export class OverlayWindow {
     // macOS: 全 Space・フルスクリーンアプリの上にも表示する
     if (process.platform === 'darwin') {
       this.win.setVisibleOnAllWorkspaces(true, { visibleOnFullScreen: true });
+      // 生成時にメニューバー分だけ下にずらされるので、画面左上に戻す
+      this.win.setBounds(bounds);
     }
 
     this.win.loadFile(

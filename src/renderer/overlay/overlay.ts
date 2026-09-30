@@ -16,8 +16,12 @@ declare global {
 }
 
 const canvas = document.getElementById('grid-canvas') as HTMLCanvasElement;
-canvas.width = screen.width;
-canvas.height = screen.height;
+// Retina 等の高 DPI 画面でも線がぼやけないよう、物理ピクセルで確保する
+const dpr = window.devicePixelRatio || 1;
+canvas.width = Math.round(screen.width * dpr);
+canvas.height = Math.round(screen.height * dpr);
+canvas.style.width = `${screen.width}px`;
+canvas.style.height = `${screen.height}px`;
 
 const renderer = new GridRenderer(canvas);
 let config: GridConfig;
@@ -74,7 +78,7 @@ canvas.addEventListener('mousedown', (e: MouseEvent) => {
 canvas.addEventListener('mouseup', () => {
   if (dragging) {
     dragging = null;
-    canvas.style.cursor = mouseOverCorner ? 'grab' : 'none';
+    canvas.style.cursor = mouseOverCorner ? 'grab' : 'default';
   }
 });
 
