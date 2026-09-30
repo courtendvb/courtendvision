@@ -8,7 +8,11 @@ import { OverlayWindow } from './overlay-window';
 import { SettingsWindow } from './settings-window';
 import { TrayManager } from './tray-manager';
 
-app.disableHardwareAcceleration();
+// Windows のみ GPU を無効化する。
+// macOS では GPU を切ると透明ウィンドウの描画が不安定になるため有効のままにする。
+if (process.platform === 'win32') {
+  app.disableHardwareAcceleration();
+}
 
 // macOS: Dock アイコンを非表示にしてトレイ専用アプリにする
 if (process.platform === 'darwin') {

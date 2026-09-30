@@ -1,4 +1,4 @@
-import { BrowserWindow } from 'electron';
+import { app, BrowserWindow } from 'electron';
 import * as path from 'path';
 import { GridConfig } from '../shared/types';
 import { IPC } from '../shared/ipc-channels';
@@ -7,7 +7,14 @@ export class SettingsWindow {
   private win: BrowserWindow | null = null;
 
   open(currentConfig: GridConfig): void {
+    // macOS: Dock 非表示（アクセサリ）アプリはアクティブにならないため、
+    // 明示的に前面へ出さないと設定ウィンドウが他アプリの背後に隠れる
+    if (process.platform === 'darwin') {
+      app.focus({ steal: true });
+    }
+
     if (this.win) {
+      this.win.show();
       this.win.focus();
       this.win.webContents.send(IPC.CONFIG_CHANGED, currentConfig);
       return;

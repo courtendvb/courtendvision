@@ -78,7 +78,10 @@ export class GridRenderer {
   }
 
   render(config: GridConfig): void {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    // canvas は物理ピクセルで確保しているので、座標系を CSS ピクセルに合わせる
+    const dpr = window.devicePixelRatio || 1;
+    this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    this.ctx.clearRect(0, 0, this.canvas.width / dpr, this.canvas.height / dpr);
     if (!config.visible) return;
 
     const { corners, color, opacity, lineWidth } = config;
