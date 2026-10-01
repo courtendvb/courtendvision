@@ -11,9 +11,9 @@
     "start": "electron .",
     "dev": "npm run build && electron .",
     "pack": "npm run build && node scripts/package.js",
-    "dist": "npm run pack && node scripts/make-zip.js",
-    "dist:win": "npm run pack && node scripts/make-zip.js",
-    "dist:mac": "npm run pack && node scripts/make-zip.js"
+    "dist": "npm run build && node scripts/dist.js",
+    "dist:win": "npm run dist",
+    "dist:mac": "npm run dist"
   },
   "devDependencies": {
     "@electron/packager": "^20.0.0",

@@ -45,11 +45,21 @@ jobs:
           APP_BIN="release/mac-unpacked/CourtEnd Vision.app/Contents/MacOS/CourtEnd Vision"
           echo "起動: $APP_BIN"
 
-          # Intel (x86_64) / Apple Silicon (arm64) 両対応か確認
+          # mac-unpacked は Apple Silicon (arm64) 版
           ARCHS=$(lipo -archs "$APP_BIN")
           echo "アーキテクチャ: $ARCHS"
-          if [[ "$ARCHS" != *x86_64* || "$ARCHS" != *arm64* ]]; then
-            echo "✗ ユニバーサルバイナリではありません"
+          if [[ "$ARCHS" != "arm64" ]]; then
+            echo "✗ Apple Silicon 版のアーキテクチャが不正です"
+            exit 1
+          fi
+
+          # Intel 版 ZIP を展開して x86_64 であることを確認
+          INTEL_ZIP=$(ls release/*-mac-x64.zip)
+          ditto -x -k "$INTEL_ZIP" "$RUNNER_TEMP/intel"
+          INTEL_ARCHS=$(lipo -archs "$RUNNER_TEMP/intel/CourtEnd Vision/CourtEnd Vision.app/Contents/MacOS/CourtEnd Vision")
+          echo "Intel 版アーキテクチャ: $INTEL_ARCHS"
+          if [[ "$INTEL_ARCHS" != "x86_64" ]]; then
+            echo "✗ Intel 版のアーキテクチャが不正です"
             exit 1
           fi
 
@@ -70,11 +80,29 @@ jobs:
             exit 1
           fi
 
-      - name: Upload artifact
+      - name: Upload artifact (Windows)
+        if: runner.os == 'Windows'
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.label }}-build
+          name: Windows-build
           path: release/*.zip
+          retention-days: 30
+
+      # macOS: Intel 用と Apple Silicon 用を別々にダウンロードできるようにする
+      - name: Upload artifact (macOS Intel)
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-Intel-build
+          path: release/*-mac-x64.zip
+          retention-days: 30
+
+      - name: Upload artifact (macOS Apple Silicon)
+        if: runner.os == 'macOS'
+        uses: actions/upload-artifact@v4
+        with:
+          name: macOS-AppleSilicon-build
+          path: release/*-mac-arm64.zip
           retention-days: 30
 
   # タグ push 時のみ: GitHub Release を作成して ZIP を添付
